@@ -1,25 +1,25 @@
 # config valid only for current version of Capistrano
-lock "3.4.0"
+lock "3.6.1"
 
-require "airbrake/capistrano3"
+#require "airbrake/capistrano3"
 require "capistrano/maintenance"
 
-set :application, "annex-ims"
-set :repo_url, "git@github.com:ndlib/annex-ims.git"
+set :application, "recap-demo"
+set :repo_url, "git@github.com:pulibrary/annex-ims.git"
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-if ENV["SCM_BRANCH"] && ENV["SCM_BRANCH"] != ""
-  set :branch, ENV["SCM_BRANCH"]
-elsif fetch(:stage).to_s == "production"
-  ask :branch, "master"
-else
-  ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-end
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+# if ENV["SCM_BRANCH"] && ENV["SCM_BRANCH"] != ""
+#   set :branch, ENV["SCM_BRANCH"]
+# elsif fetch(:stage).to_s == "production"
+#   ask :branch, "master"
+# else
+#   ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+# end
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/app/annex-ims"
+set :deploy_to, "/opt/recap_demo"
 
 set :ssh_options, {
   paranoid: false,
@@ -45,7 +45,7 @@ set :linked_files, fetch(:linked_files, []).push("config/database.yml")
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push("bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system")
-set :linked_dirs, fetch(:linked_dirs, []).push("bin", "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "solr")
+set :linked_dirs, fetch(:linked_dirs, []).push("log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "solr")
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -55,6 +55,9 @@ set :default_env, { path: "/opt/ruby/current/bin:$PATH" }
 # set :keep_releases, 5
 
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
+
+
+set :passenger_restart_with_touch, true
 
 namespace :deploy do
 
@@ -96,6 +99,6 @@ after "deploy:started", "maintenance:enable"
 after "deploy:published", "maintenance:disable"
 after "deploy:reverted", "maintenance:disable"
 
-after "deploy:finished", "sneakers:restart"
+#after "deploy:finished", "sneakers:restart"
 
-after "deploy:finished", "airbrake:deploy"
+#after "deploy:finished", "airbrake:deploy"

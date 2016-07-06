@@ -41,7 +41,7 @@ end
     title: "Seed Request #{barcode}",
     requested: Faker::Date.between(30.days.ago, Date.today),
     rapid: false,
-    source: "Aleph",
+    source: "Voyager",
     del_type: "loan",
     req_type: "doc_del",
   )
@@ -66,12 +66,10 @@ end
 end
 
 [
-  "jhartzle",
-  "dwolfe2",
-  "rfox2",
-  "jkennel",
-  "awetheri",
-  "jgondron"
+  "jpstroop",
+  "marvinb",
+  "jnadal",
+  "kr2"
 ].each do |username|
   u = User.where(username: username).first || User.new(username: username)
   u.admin = true

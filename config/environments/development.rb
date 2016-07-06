@@ -43,7 +43,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Configures a user as an administrator
-  config.admin_user_name = "mvanneve"
+  config.admin_user_name = "kr2"
 
   # Configures time before user is logged out due to inactivity
   config.user_timeout = 24.hours
@@ -51,6 +51,6 @@ end
 
 Devise.setup do |config|
   # CAS auth
-  config.cas_base_url = "https://cas.library.nd.edu/cas"
-  config.cas_login_url = "https://cas.library.nd.edu/cas/login?renew=true"
+  config.cas_base_url = "https://fed.princeton.edu/cas"
+  config.cas_login_url = "https://fed.princeton.edu/cas/login?renew=true"
 end

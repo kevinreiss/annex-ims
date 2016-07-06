@@ -38,7 +38,7 @@ staging:
   solr:
     hostname: localhost
     port: 8080
-    path: /solr/annex-ims
+    path: /recap_demo
     log_level: WARNING
     read_timeout: 2
     open_timeout: 0.5

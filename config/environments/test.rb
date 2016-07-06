@@ -52,5 +52,6 @@ end
 
 Devise.setup do |config|
   # CAS auth
-  config.cas_base_url = 'https://login.nd.edu/cas'
+  config.cas_base_url = "https://fed.princeton.edu/cas"
+  config.cas_login_url = "https://fed.princeton.edu/cas/login?renew=true"
 end
